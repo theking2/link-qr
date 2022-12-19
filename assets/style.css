@@ -1,0 +1,101 @@
+:root {
+  font: normal 12px/1.2 Verdana;
+  color: white;
+}
+body {
+   background: linear-gradient(45deg, #49a09d, #5f2c82);
+   background-repeat: no-repeat;
+   margin: 0;
+   padding: 0;
+}
+p {
+  margin:0.2rem;
+}
+main {
+  margin: 0 auto;
+  padding: 1em;
+  height: 100vh;
+}
+#form-container {
+  padding: 10px;
+  max-width: 300px;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  grid-row-gap: 1em;
+}
+
+input:not([type=submit]) {
+  color: inherit;
+  background-color: inherit;
+  border-color: white;
+  border-style: ridge;
+  border-width: 1px;
+  border-radius: 3px;
+}
+
+input,textarea, button {
+  font: inherit;
+  color: inherit;
+  background-color: rgba(0,0,0,0.1);
+}
+
+input:focus {
+  background-color: inherit;
+}
+textarea {
+  width: 300px;
+  height: 5em;
+}
+
+#container {
+  margin: 0 auto;
+}
+#password-input {
+  position: relative;
+}
+#show-toggle {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+
+td.edit {
+  background-color: white;
+  color:black;
+}
+#code-table {
+  width: 800px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);;
+}
+#code-table th,
+#code-table td {
+  border: 1pt solid black;
+  border-collapse: collapse;
+  text-align: left;
+}
+@media screen and (max-width: 600px) {
+  :root {
+    font-size: large;
+    text-align: center;
+  }
+  #form-container {
+    max-width: 100%;
+    grid-row-gap: 0.75em;
+    grid-template-columns: 100%;
+    justify-items: center;
+  }
+
+  input, button {
+    font-size: 1.2em;
+  }
+
+  input:not([type=submit]) {
+    width: 100%;
+  }
+
+  input[type=color] {
+    width: 33%;
+    height: 3rem;
+  }
+
+}
