@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
-require_once '/inc/utils.inc.php';
-require_once '/inc/settings.inc.php';
+require_once 'inc/utils.inc.php';
+require_once 'inc/settings.inc.php';
 // Allow these characters
 $charset ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNAOPQRSTUVWXYZ1234567890-_.!~*'()";
 
@@ -19,7 +19,7 @@ function getCode(): string {
   return $result;
 }
 
-require_once '/inc/connect.php';
+require_once 'inc/connect.inc.php';
 $insert = $db-> prepare("
 insert into
     code( code,  url,  last_used, hits)
