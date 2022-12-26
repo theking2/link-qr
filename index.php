@@ -37,7 +37,7 @@ if (!array_key_exists('user_id', $_SESSION)) {
 // test for url but ignore our own
 if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))) {
 	$url = trim($_GET['url']);
-	if (strlen($url) < strlen(base_url) + 5) {
+	if (strlen($url) < strlen(base_url) + 8) {
 		// don't make longer urls
 		$full_url = $url;
 	} else {
