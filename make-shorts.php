@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 require_once 'inc/utils.inc.php';
 require_once 'inc/settings.inc.php';
-// Allow this characters
+// Allow these characters
 $charset ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNAOPQRSTUVWXYZ1234567890-_.!~*'()";
 
 function getCode(): string {
