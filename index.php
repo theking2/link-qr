@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 require_once './inc/settings.inc.php';
 require_once './inc/utils.inc.php';
@@ -27,7 +29,7 @@ if (array_key_exists('code', $_GET)) {
 define('base_url', $settings['base_url']);
 define('default_url', $settings['default_url']);
 require_once './inc/session.inc.php';
-if( !array_key_exists('user_id', $_SESSION) ) {
+if (!array_key_exists('user_id', $_SESSION)) {
 	header('Location:./logon');
 	exit(0);
 }
@@ -85,7 +87,13 @@ require_once 'inc/session.inc.php';
 			<?php
 			foreach (\Link\Code::findAll(where: ['user_id' => $_SESSION['user_id']]) as $code) {
 				echo '<tr>';
-				echo wrap_tag('td', $code->code);
+				$baseUrl = $_SERVER['REQUEST_SCHEME']
+					. '://' . $_SERVER['HTTP_HOST']
+					. $_SERVER['REQUEST_URI'];
+				echo wrap_tag(
+					'td',
+					"<a target=\"_blank\" href=\"$baseUrl$code->code\">$code->code</a>"
+				);
 				echo wrap_tag('td', $code->url);
 			}
 			?>
