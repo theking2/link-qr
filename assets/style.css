@@ -2,20 +2,24 @@
   font: normal 12px/1.2 Verdana;
   color: white;
 }
+
 body {
-   background: linear-gradient(45deg, #49a09d, #5f2c82);
-   background-repeat: no-repeat;
-   margin: 0;
-   padding: 0;
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
 }
+
 p {
-  margin:0.2rem;
+  margin: 0.2rem;
 }
+
 main {
   margin: 0 auto;
   padding: 1em;
   height: 100vh;
 }
+
 #form-container {
   padding: 10px;
   max-width: 300px;
@@ -28,31 +32,43 @@ input:not([type=submit]) {
   color: inherit;
   background-color: inherit;
   border-color: white;
-  border-style: ridge;
+  border-style: inset;
   border-width: 1px;
   border-radius: 3px;
 }
 
-input,textarea, button {
+input,
+textarea,
+button {
   font: inherit;
   color: inherit;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid white;
 }
 
-input:focus {
+input:focus,
+textarea:focus {
   background-color: inherit;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0,0,0,0);
+  outline: none;;
 }
+
 textarea {
   width: 300px;
   height: 5em;
+  border: 1px solid white;
+
 }
 
 #container {
   margin: 0 auto;
 }
+
 #password-input {
   position: relative;
 }
+
 #show-toggle {
   cursor: pointer;
   position: absolute;
@@ -61,26 +77,33 @@ textarea {
 
 td.edit {
   background-color: white;
-  color:black;
+  color: black;
 }
+
 #code-table {
   width: 800px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);;
+  border-collapse: collapse;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  ;
 }
+
 #code-table th,
 #code-table td {
-  border: 1pt solid black;
-  border-collapse: collapse;
+  border: 1pt solid white;
   text-align: left;
+  padding: 8px;
 }
+
 #code-table a {
   color: inherit;
 }
+
 @media screen and (max-width: 600px) {
   :root {
     font-size: large;
     text-align: center;
   }
+
   #form-container {
     max-width: 100%;
     grid-row-gap: 0.75em;
@@ -88,7 +111,8 @@ td.edit {
     justify-items: center;
   }
 
-  input, button {
+  input,
+  button {
     font-size: 1.2em;
   }
 
