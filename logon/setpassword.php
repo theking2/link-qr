@@ -91,7 +91,7 @@ if ($messages) {
           global $user;
 
           $to      = $user->email;
-          $subject = "DWH Kennwort geändert";
+          $subject = "LINK Kennwort geändert";
           $headers = ''
             . 'From: ' . 'info@link-qr.ch' . PHP_EOL
             . 'MIME-Version: 1.0' . PHP_EOL
