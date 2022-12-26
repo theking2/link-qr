@@ -13,7 +13,7 @@ if (array_key_exists('code', $_GET)) {
 
 			header("Cache-Control: no-cache");
 			header("Pragma: no-cache");
-			header("Location: "https://$url");
+			header("Location: https://$url");
 			exit();
 		} else {
 			header("HTTP/1.1 404 Not Found");
