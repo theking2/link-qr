@@ -16,14 +16,17 @@ passwort = 'pass'
 ## Tables and views
 ```sql
 CREATE TABLE `code` (
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
   `code` char(5) COLLATE latin1_bin NOT NULL,
   `url` varchar(4096) COLLATE latin1_bin DEFAULT NULL,
   `last_used` datetime NOT NULL DEFAULT current_timestamp(),
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT 0
-) ENGINE=Aria DEFAULT CHARSET=latin1 COLLATE=latin1_bin PACK_KEYS=0;
-ALTER TABLE `code`
-  ADD PRIMARY KEY (`code`) USING HASH;
+  `hits` int(10) unsigned NOT NULL DEFAULT 0,
+  `url_sha` char(64) GENERATED ALWAYS AS (sha2(`url`,256)) STORED,
+  PRIMARY KEY (`code`) USING HASH,
+  UNIQUE KEY `ix_code_url_sha` (`url_sha`)
+
+) ENGINE=Aria DEFAULT CHARSET=latin1;
+ALTER TABLE `code` ADD FULLTEXT KEY `ix_code_url` (`url`);
 
 CREATE TABLE `user` (
   `id` int(10) NOT NULL,
