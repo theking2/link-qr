@@ -73,6 +73,9 @@ td.edit {
   border-collapse: collapse;
   text-align: left;
 }
+#code-table a {
+  color: inherit;
+}
 @media screen and (max-width: 600px) {
   :root {
     font-size: large;
