@@ -92,7 +92,7 @@ require_once 'inc/session.inc.php';
 					. $_SERVER['REQUEST_URI'];
 				echo wrap_tag(
 					'td',
-					"<a target=\"_blank\" href=/\"$code->code\">$code->code</a>"
+					"<a target=\"_blank\" href=\"/$code->code\">$code->code</a>"
 				);
 				echo wrap_tag('td', $code->url);
 			}
