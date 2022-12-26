@@ -1,0 +1,31 @@
+<script>"use strict";
+  let url = "http://link-qr.localhost/api/index.php/Code";
+
+  async function doset() {
+    let body = { url: 'www.sbw-media.ch' };
+    let options = { method: 'PUT', body: JSON.stringify(body) }
+
+    const response = await fetch(url+'?code=aaaaa', options);
+    if( !response.ok ) {
+      console.error(response);
+    } else {
+      const result = await response.json();
+      console.log(result);
+    }
+
+  }
+  async function doget() {
+    let options = {
+      method: 'GET',
+    }
+    const response = await fetch(url+'?code=-tnlt', options);
+    if( !response.ok ) {
+      console.error(response);
+    } else {
+      const result = await response.json();
+      console.log(result);
+    }
+
+  }
+  doset();
+</script>
