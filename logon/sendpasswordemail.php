@@ -50,7 +50,7 @@ if( strlen($uuid) == 0 ) {
 $url = getCurrentUrlPath() . "/setpassword.php?vc=$uuid&username=$username";
 
 $to      = $email;
-$subject = "DWH Kennwort zurücksetzen";
+$subject = "LINK Kennwort zurücksetzen";
 $headers = ''
 .'From: ' . 'info@dwh.guerbet.ch' . PHP_EOL
 .'MIME-Version: 1.0'.PHP_EOL
