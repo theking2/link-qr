@@ -81,7 +81,7 @@ td.edit {
 }
 
 #code-table {
-  width: 800px;
+  width: 90vw;
   border-collapse: collapse;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   ;
@@ -93,7 +93,9 @@ td.edit {
   text-align: left;
   padding: 8px;
 }
-
+#code-table td:nth-child(2) {
+  word-wrap: anywhere;
+}
 #code-table a {
   color: inherit;
 }
