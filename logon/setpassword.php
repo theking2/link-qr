@@ -96,7 +96,7 @@ if ($messages) {
             . 'From: ' . 'info@link-qr.ch' . PHP_EOL
             . 'MIME-Version: 1.0' . PHP_EOL
             . 'Content-type: text/html; charset=utf-8' . PHP_EOL;
-          $message = sprintf(SEND_PWD_TEMPLATE, $user->uername, $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']);
+          $message = sprintf(SEND_PWD_TEMPLATE, $user->username, $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']);
           if (!DEBUG) {
             mail($to, $subject, $message, $headers);
           }
