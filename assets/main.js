@@ -9,6 +9,7 @@ const $ = (selector, base = document) => {
   let elements = base.querySelectorAll(selector);
   return (elements.length == 1) ? elements[0] : elements;
 }
+const api = '/api/index.php';
 
 document.addEventListener("DOMContentLoaded", ev => {
   getSettings();
@@ -25,28 +26,44 @@ document.addEventListener("DOMContentLoaded", ev => {
 
   onRowClick("code-table", row => {
     $("#url").value = $("#base-url").value + $("td", row)[0].textContent;
-    let cell = $("td", row)[1];
-    cell.contentEditable = true;
-    cell.classList.add("edit");
+    let cellCode = $("td", row)[0];
+    let cellUrl = $("td", row)[1];
+    let cellUrlValue = cellUrl.textContent;
 
-    cell.addEventListener("blur", () => {
-      cell.contentEditable = false;
-      cell.classList.remove("edit");
+    const startEdit = (el) => {
+      cellUrl.contentEditable = true;
+      cellUrl.classList.add("edit");
+    }
+    const endEdit = (el) => {
+      cellUrl.contentEditable = false;
+      cellUrl.classList.remove("edit");
+    }
+    startEdit(cellUrl);
+
+
+    cellUrl.addEventListener("blur", () => {
+      cellUrl.textContent = cellUrlValue;
+      endEdit(cellUrl);
     })
-    cell.addEventListener("keydown", ev => {
+    cellUrl.addEventListener("keydown", ev => {
       ev.stopImmediatePropagation();
-      if (ev.keyCode == 13) {
-        cell.contentEditable = false;
-        cell.classList.remove("edit");
-        console.log(`save data ${cell.textContent}`);
-      }
-      if (ev.keyCode == 27) {
-        cell.contentEditable = false;
-        cell.classList.remove("edit");
+      switch (ev.code) {
+        default: break;
+        case "Enter":
+          endEdit(cellUrl);
+          console.log(`save data ${cellUrl.textContent}`);
+          doSetUrl(cellCode.textContent, cellUrl.textContent);
+          $("#url").value = $("#base-url").value + $("td", row)[0].textContent;
+          break;
+        case "Escape":
+          cellUrl.textContent = cellUrlValue;
+          endEdit(cellUrl);
+          break;
       }
     }, { passive: true, capture: false });
-    cell.focus();
+    cellUrl.focus();
   });
+
 
 
   // select all on focus
@@ -153,3 +170,17 @@ function onRowClick(tableId, callback) {
     }(table.rows[i]);
   }
 };
+
+async function doSetUrl(code, url) {
+  let body = { url: url };
+  let options = { method: 'PUT', body: JSON.stringify(body) }
+
+  const response = await fetch(api + '/Code?code=' + code, options);
+  if (!response.ok) {
+    console.error(response);
+  } else {
+    const result = await response.json();
+    console.log(result);
+  }
+
+}

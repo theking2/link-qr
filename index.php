@@ -1,6 +1,5 @@
-<?php
+<?php declare(strict_types=1);
 
-declare(strict_types=1);
 require_once './inc/settings.inc.php';
 require_once './inc/utils.inc.php';
 if (array_key_exists('code', $_GET)) {
@@ -28,6 +27,10 @@ if (array_key_exists('code', $_GET)) {
 define('base_url', $settings['base_url']);
 define('default_url', $settings['default_url']);
 require_once './inc/session.inc.php';
+if( !array_key_exists('user_id', $_SESSION) ) {
+	header('Location:./logon');
+	exit(0);
+}
 
 // test for url but ignore our own
 if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))) {
