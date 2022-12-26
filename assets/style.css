@@ -50,8 +50,9 @@ input:focus,
 textarea:focus {
   background-color: inherit;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0,0,0,0);
-  outline: none;;
+  border: 1px solid rgba(0, 0, 0, 0);
+  outline: none;
+  ;
 }
 
 textarea {
@@ -84,7 +85,7 @@ td.edit {
   width: 90vw;
   border-collapse: collapse;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  ;
+  background: linear-gradient(90deg, #49a09d, #5f2c82);
 }
 
 #code-table th,
@@ -93,9 +94,11 @@ td.edit {
   text-align: left;
   padding: 8px;
 }
+
 #code-table td:nth-child(2) {
   word-wrap: anywhere;
 }
+
 #code-table a {
   color: inherit;
 }
