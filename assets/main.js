@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", ev => {
     })
     cellUrl.addEventListener("keydown", ev => {
       ev.stopImmediatePropagation();
-      switch (ev.code) {
+      switch (ev.key) {
         default: break;
         case "Enter":
           endEdit(cellUrl);
