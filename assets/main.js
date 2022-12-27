@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", ev => {
   $("#color").onchange = doQR;
   $("#size").onchange = doQR;
   $("#code-table").addEventListener('click', ev => {
+    // the parent of a cell is probably a rwo. should test this
     doRowClick(ev.target.parentElement);
   },{ passive: true, capture: false } );
 
@@ -39,10 +40,19 @@ const doRowClick = row => {
   let cellUrl = $("td", row)[1];
   let cellUrlValue = cellUrl.textContent;
 
+/**
+ * 
+ * @param {Element} el 
+ */
   const startEdit = (el) => {
     cellUrl.contentEditable = true;
     cellUrl.classList.add("edit");
   }
+  /**
+   * 
+   * @param {Element} el 
+   * @param {string} newtext somehow this is needed for Chrome
+   */
   const endEdit = (el, newtext) => {
     cellUrl.removeEventListener("blur", blurEH, { passive: true, capture: false })
     cellUrl.removeEventListener("keydown", keyEH, { passive: true, capture: false })
@@ -50,16 +60,18 @@ const doRowClick = row => {
     cellUrl.classList.remove("edit");
     cellUrl.textContent = newtext;
   }
+
   startEdit(cellUrl);
-
-
+  /**
+   * on loosing focus, abort edit
+   */
   const blurEH = cellUrl.addEventListener("blur", () => {
-    cellUrl.textContent = cellUrlValue;
-    endEdit(cellUrl);
+    endEdit(cellUrl, cellUrlValue);
   })
+  /**
+   * handle Enter and Esc events
+   */
   const keyEH = cellUrl.addEventListener("keydown", ev => {
-    ev.stopImmediatePropagation();
-
     switch (ev.key) {
       default: break;
       case "Enter":
@@ -69,15 +81,14 @@ const doRowClick = row => {
         endEdit(cellUrl, cellUrl.textContent);
         break;
       case "Escape":
-        cellUrl.textContent = cellUrlValue;
-        endEdit(cellUrl);
+        endEdit(cellUrl, cellUrlValue);
         break;
     }
   }, { passive: true, capture: false });
+  // doesn't work: const onFocusEH = cellUrl.addEventListener('focus', ev=> ev.target.select());
+
   cellUrl.focus();
 };
-
-
 
 // select all on focus
 const url = $('#url');
