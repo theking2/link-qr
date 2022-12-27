@@ -27,6 +27,12 @@ document.addEventListener("DOMContentLoaded", ev => {
     // the parent of a cell is probably a rwo. should test this
     doRowClick(ev.target.parentElement);
   },{ passive: true, capture: false } );
+  // prevent enter in url
+  $('#url').addEventListener('keypress', ev=> {
+    if(ev.key=="Enter")
+      ev.preventDefault()
+    }
+  );
 
 /**
  * Eventhandler for row clicks
