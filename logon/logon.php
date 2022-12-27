@@ -10,7 +10,7 @@ $script = $_POST['script']??$_GET['s']??'';
 if( !array_key_exists('username', $_POST) or strlen($_POST['username']) === 0 ) {
 	// no logon attempt
 	// redirect to login page
-	header("Location: ../$script");
+	header("Location: ./");
 	exit;
 }
 
@@ -25,7 +25,7 @@ if( isset($_POST['action']) ) {
 		$_SESSION['username'] = $user-> username;
 		$_SESSION['email'] = $user-> email;
 		$_SESSION['failed attempt'] = 0;
-   	header( "Location: $script" );
+   	header( "Location: /" );
 		
   } else {
     header('Location: /logon?s='.$script);
