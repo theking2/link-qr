@@ -79,6 +79,7 @@ if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))
 
 		<h1>Code-Generator</h1>
 		<h2>Bekannte Codes</h2>
+		<p>Auf URL klicken um zu ändern, zum Bestätigen Eingabe-Taste, Esc. für Abbbrechen</p>
 		<table id="code-table">
 			<tr>
 				<th>Code
