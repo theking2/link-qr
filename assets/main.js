@@ -23,57 +23,70 @@ document.addEventListener("DOMContentLoaded", ev => {
   $("#bg-color").onchange = doQR;
   $("#color").onchange = doQR;
   $("#size").onchange = doQR;
+  $("#code-table").addEventListener('click', ev => {
+    doRowClick(ev.target.parentElement);
+  },{ passive: true, capture: false } );
 
-  onRowClick("code-table", row => {
-    $("#url").value = $("#base-url").value + $("td", row)[0].textContent;
-    let cellCode = $("td", row)[0];
-    let cellUrl = $("td", row)[1];
-    let cellUrlValue = cellUrl.textContent;
+/**
+ * Eventhandler for row clicks
+ */
+const doRowClick = row => {
+  // ignore none td clicks
+  if (row && $("td", row).length === 0) return false;
 
-    const startEdit = (el) => {
-      cellUrl.contentEditable = true;
-      cellUrl.classList.add("edit");
+  $("#url").value = $("#base-url").value + $("td", row)[0].textContent;
+  let cellCode = $("td", row)[0];
+  let cellUrl = $("td", row)[1];
+  let cellUrlValue = cellUrl.textContent;
+
+  const startEdit = (el) => {
+    cellUrl.contentEditable = true;
+    cellUrl.classList.add("edit");
+  }
+  const endEdit = (el, newtext) => {
+    cellUrl.removeEventListener("blur", blurEH, { passive: true, capture: false })
+    cellUrl.removeEventListener("keydown", keyEH, { passive: true, capture: false })
+    cellUrl.contentEditable = false;
+    cellUrl.classList.remove("edit");
+    cellUrl.textContent = newtext;
+  }
+  startEdit(cellUrl);
+
+
+  const blurEH = cellUrl.addEventListener("blur", () => {
+    cellUrl.textContent = cellUrlValue;
+    endEdit(cellUrl);
+  })
+  const keyEH = cellUrl.addEventListener("keydown", ev => {
+    ev.stopImmediatePropagation();
+
+    switch (ev.key) {
+      default: break;
+      case "Enter":
+        console.log(`save data ${cellUrl.textContent}`);
+        doSetUrl(cellCode.textContent, cellUrl.textContent);
+        $("#url").value = $("#base-url").value + $("td", row)[0].textContent;
+        endEdit(cellUrl, cellUrl.textContent);
+        break;
+      case "Escape":
+        cellUrl.textContent = cellUrlValue;
+        endEdit(cellUrl);
+        break;
     }
-    const endEdit = (el) => {
-      cellUrl.contentEditable = false;
-      cellUrl.classList.remove("edit");
-    }
-    startEdit(cellUrl);
-
-
-    cellUrl.addEventListener("blur", () => {
-      cellUrl.textContent = cellUrlValue;
-      endEdit(cellUrl);
-    })
-    cellUrl.addEventListener("keydown", ev => {
-      ev.stopImmediatePropagation();
-      switch (ev.key) {
-        default: break;
-        case "Enter":
-          endEdit(cellUrl);
-          console.log(`save data ${cellUrl.textContent}`);
-          doSetUrl(cellCode.textContent, cellUrl.textContent);
-          $("#url").value = $("#base-url").value + $("td", row)[0].textContent;
-          break;
-        case "Escape":
-          cellUrl.textContent = cellUrlValue;
-          endEdit(cellUrl);
-          break;
-      }
-    }, { passive: true, capture: false });
-    cellUrl.focus();
-  });
+  }, { passive: true, capture: false });
+  cellUrl.focus();
+};
 
 
 
-  // select all on focus
-  const url = $('#url');
-  url.addEventListener('focus', ev => ev.target.select());
+// select all on focus
+const url = $('#url');
+url.addEventListener('focus', ev => ev.target.select());
 
-  // clear query_string
-  history.pushState({}, '', '/');
-  url.select();
-  url.focus();
+// clear query_string
+history.pushState({}, '', '/');
+url.select();
+url.focus();
 
 });
 
@@ -156,19 +169,6 @@ const saveSettings = _ => {
     size: $('#size').value
   }
   window.localStorage.setItem('settings', JSON.stringify(settings));
-};
-
-function onRowClick(tableId, callback) {
-  var table = document.getElementById(tableId),
-    rows = table.getElementsByTagName("tr"),
-    i;
-  for (i = 0; i < rows.length; i++) {
-    table.rows[i].onclick = function (row) {
-      return function () {
-        callback(row);
-      };
-    }(table.rows[i]);
-  }
 };
 
 async function doSetUrl(code, url) {
