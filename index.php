@@ -28,7 +28,9 @@ if (array_key_exists('code', $_GET)) {
 
 define('base_url', $settings['base_url']);
 define('default_url', $settings['default_url']);
+
 require_once './inc/session.inc.php';
+
 if (!array_key_exists('user_id', $_SESSION)) {
 	header('Location:./logon');
 	exit(0);
@@ -60,8 +62,6 @@ if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))
 }
 //var_dump($_GET);
 
-
-require_once 'inc/session.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="de">

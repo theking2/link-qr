@@ -14,7 +14,7 @@ if( !array_key_exists('username', $_POST) or strlen($_POST['username']) === 0 ) 
 	exit;
 }
 
-if( isset($_POST['action']) && ($_POST['action']==='Login' ) ) {
+if( isset($_POST['action']) ) {
 	$user = \Link\User::find(where:['username'=> $_POST['username']]);
 
 	if( $user and $user-> checkPassword($_POST['password']) ) {

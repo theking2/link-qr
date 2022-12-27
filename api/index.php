@@ -1,8 +1,12 @@
 <?php declare(strict_types=1);
 namespace Link;
-require '../inc/session.inc.php';
 require '../inc/settings.inc.php';
 require '../inc/utils.inc.php';
+require '../inc/session.inc.php';
+if( !array_key_exists('user_id', $_SESSION) ) {
+  sendResponse(unprocessableEntityResponse());
+  exit(0);
+}
 /**
  * api has the following endpoints:
  * Request methods allowed: GET, POST, PUT, DELETE, OPTIONS
@@ -31,8 +35,7 @@ require '../inc/utils.inc.php';
 /**
  * these entities are allowed, all others get a notFoundResponse
  */
-$allowed = ['Code',
-];	
+$allowed = ['Code'];	
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 /**
