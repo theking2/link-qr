@@ -52,7 +52,7 @@ $url = getCurrentUrlPath() . "/setpassword.php?vc=$uuid&username=$username";
 $to      = $email;
 $subject = "LINK Kennwort zurücksetzen";
 $headers = ''
-.'From: ' . 'info@dwh.guerbet.ch' . PHP_EOL
+.'From: ' . 'hostmaster@king.ma' . PHP_EOL
 .'MIME-Version: 1.0'.PHP_EOL
 .'Content-type: text/html; charset=utf-8'.PHP_EOL
 ;
