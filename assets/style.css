@@ -4,7 +4,7 @@
 }
 
 body {
-  background: linear-gradient(75deg, hsl(178,37%,46%), hsl(276,49%,34%));
+  background: linear-gradient(35deg, hsl(178,37%,46%), hsl(276,49%,34%));
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
