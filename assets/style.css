@@ -28,38 +28,54 @@ main {
   grid-row-gap: 1em;
 }
 
-input:not([type=submit]) {
-  color: inherit;
-  background-color: inherit;
-  border-color: white;
-  border-style: inset;
-  border-width: 1px;
-  border-radius: 3px;
-}
-
-input,
 textarea,
+input,
 button {
   font: inherit;
   color: inherit;
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 1px solid white;
-}
-
-input:focus,
-textarea:focus {
-  background-color: inherit;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 8px;
   outline: none;
-  ;
+}
+textarea,
+input:not([type=submit]):not([type=color])  {
+  background-color: inherit;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8);
+  border-radius: 3px;
+  border: none;
 }
 
-textarea {
+button,
+input[type=submit],
+input[type=color] {
+  font: inherit;
+  color: inherit;
+  border: 3px groove #49a09d;
+  background-color: transparent
+}
+input[type=color] {
+  padding:0;
+}
+button:active,
+input[type=submit]:active {
+  background-color: #49a09d;
+  border-style: inset;
+}
+
+td[contentEditable=true],
+input:not([type=submit]):focus,
+textarea:focus {
+  background-color: white;
+  color: black;
+  border: none;
+  outline: none;
+}
+td[contentEditable=true] {
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8);
+}
+
+#url {
   width: 300px;
   height: 5em;
-  border: 1px solid white;
-
 }
 
 #container {
@@ -76,13 +92,9 @@ textarea {
   right: 0;
 }
 
-td.edit {
-  background-color: white;
-  color: black;
-}
-
 #code-table {
-  width: 90vw;
+  width: 100%;
+  max-width: 800px;
   border-collapse: collapse;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   background: linear-gradient(90deg, #49a09d, #5f2c82);
@@ -94,7 +106,9 @@ td.edit {
   text-align: left;
   padding: 8px;
 }
-
+#code-table td:nth-child(1) {
+  min-width: 5em;
+}
 #code-table td:nth-child(2) {
   word-wrap: anywhere;
 }
@@ -129,5 +143,14 @@ td.edit {
     width: 33%;
     height: 3rem;
   }
-
+  #url {
+    width: 100%;
+  }
+  label {
+    position: absolute;
+    bottom: -100px;
+  }
+  input[type=color] {
+    display: inline;
+  }
 }
