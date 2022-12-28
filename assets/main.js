@@ -42,6 +42,8 @@ const doRowClick = row => {
   if (row && $("td", row).length === 0) return false;
 
   $("#url").value = $("#base-url").value + $("td", row)[0].textContent;
+  document.getElementById("do-qr").click()
+
   let cellCode = $("td", row)[0];
   let cellUrl = $("td", row)[1];
   let cellUrlValue = cellUrl.textContent;
@@ -52,7 +54,7 @@ const doRowClick = row => {
  */
   const startEdit = (el) => {
     cellUrl.contentEditable = true;
-    cellUrl.classList.add("edit");
+    cellUrl.focus();
   }
   /**
    * 
@@ -60,10 +62,10 @@ const doRowClick = row => {
    * @param {string} newtext somehow this is needed for Chrome
    */
   const endEdit = (el, newtext) => {
-    cellUrl.removeEventListener("blur", blurEH, { passive: true, capture: false })
-    cellUrl.removeEventListener("keydown", keyEH, { passive: true, capture: false })
+    cellUrl.removeEventListener("blur", blurEH);
+    cellUrl.removeEventListener("keydown", keyEH);
+
     cellUrl.contentEditable = false;
-    cellUrl.classList.remove("edit");
     cellUrl.textContent = newtext;
   }
 
@@ -71,13 +73,15 @@ const doRowClick = row => {
   /**
    * on loosing focus, abort edit
    */
-  const blurEH = cellUrl.addEventListener("blur", () => {
+  const blurEH = _ => {
     endEdit(cellUrl, cellUrlValue);
-  })
+  };
+  cellUrl.addEventListener("blur", blurEH), { passive: true };
+
   /**
    * handle Enter and Esc events
    */
-  const keyEH = cellUrl.addEventListener("keydown", ev => {
+  const keyEH = ev => {
     switch (ev.key) {
       default: break;
       case "Enter":
@@ -90,10 +94,9 @@ const doRowClick = row => {
         endEdit(cellUrl, cellUrlValue);
         break;
     }
-  }, { passive: true, capture: false });
+  };
+  cellUrl.addEventListener("keydown", keyEH, { passive: true });
   // doesn't work: const onFocusEH = cellUrl.addEventListener('focus', ev=> ev.target.select());
-
-  cellUrl.focus();
 };
 
 // select all on focus
