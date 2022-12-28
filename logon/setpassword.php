@@ -1,6 +1,5 @@
-<?php
+<?php declare(strict_types=1);
 
-declare(strict_types=1);
 const SEND_PWD_TEMPLATE = '<html>
 <head>
 <style type="text/css">
@@ -93,7 +92,7 @@ if ($messages) {
           $to      = $user->email;
           $subject = "LINK Kennwort geändert";
           $headers = ''
-            . 'From: ' . 'info@link-qr.ch' . PHP_EOL
+            . 'From: ' . 'hostmaster@king.ma' . PHP_EOL
             . 'MIME-Version: 1.0' . PHP_EOL
             . 'Content-type: text/html; charset=utf-8' . PHP_EOL;
           $message = sprintf(SEND_PWD_TEMPLATE, $user->username, $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']);
