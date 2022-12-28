@@ -4,7 +4,7 @@
 }
 
 body {
-  background: linear-gradient(45deg, #49a09d, #5f2c82);;
+  background: linear-gradient(45deg, hsl(178 37% 46%), #5f2c82);
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
@@ -123,7 +123,7 @@ textarea:focus {
   max-width: 800px;
   border-collapse: collapse;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(90deg, #49a09d, #5f2c82);;
+  background: linear-gradient(90deg, hsl(178 37% 46%), #5f2c82);;
 }
 
 #code-table th,
