@@ -33,6 +33,9 @@ document.addEventListener("DOMContentLoaded", ev => {
       ev.preventDefault()
     }
   );
+  // $('#logoff').addEventListener("click", _=> {
+  //   window.location.replace( '/logon/' );
+  // }, { capture: true });
 
 /**
  * Eventhandler for row clicks

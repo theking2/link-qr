@@ -78,6 +78,7 @@ if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))
 	<main>
 
 		<h1>Code-Generator</h1>
+		<a href="/logon">Abmelden</a>
 		<h2>Bekannte Codes</h2>
 		<p>Auf URL klicken um zu ändern, zum Bestätigen Eingabe-Taste, Esc. für Abbbrechen</p>
 		<table id="code-table">
@@ -99,23 +100,25 @@ if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))
 			}
 			?>
 		</table>
+		<h2>Edit</h2>
 		<p>URL eingeben und Farben/Grösse einstellen
 		<p>Klick auf QR Code für Download.
 		<p>Kürzen mit Enter-Taste. Gekürzt werden nur längere URLs.
 		<form id="form-container" method="get">
 
-			<label for="url">URL:</label>
+
+			<label for="url">URL</label>
 			<textarea id="url" name="url"><?= $url ?></textarea>
 
-			<span>Kürzen mit Enter</span>
+			<span></span>
 			<div>
 				<input type=submit value="Kürzen" id="shorten" data-full-url="<?= $full_url ?>"><br />
 			</div>
 
-			<label for="bg-color">Hintergrundfarbe:</label>
+			<label for="bg-color">Hintergrundfarbe</label>
 			<input type="color" id="bg-color" value="#8cbf35">
 
-			<label for="color">Farbe:</label>
+			<label for="color">Farbe</label>
 			<input type="color" id="color" value="#000000">
 
 			<label for="size">Grösse</label>

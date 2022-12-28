@@ -14,6 +14,15 @@ p {
   margin: 0.2rem;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom: 2px solid white;
+}
+
 main {
   margin: 0 auto;
   padding: 1em;
@@ -24,8 +33,18 @@ main {
   padding: 10px;
   max-width: 300px;
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 120px 200px;
   grid-row-gap: 1em;
+}
+
+label {
+  text-align: right;
+  padding-block-start: 0.5em;
+  margin-inline-end: 1em;
+}
+
+label::after {
+  content: ":";
 }
 
 textarea,
@@ -35,12 +54,13 @@ button {
   color: inherit;
   padding: 8px;
   outline: none;
-}
-textarea,
-input:not([type=submit]):not([type=color]):not([type=range])  {
-  background-color: inherit;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8);
+  background-color: transparent;
   border-radius: 3px;
+}
+
+textarea,
+input:not([type=submit]):not([type=color]):not([type=range]) {
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8);
   border: none;
 }
 
@@ -50,11 +70,13 @@ input[type=color] {
   font: inherit;
   color: inherit;
   border: 3px groove #49a09d;
-  background-color: transparent
+  width: 100%;
 }
+
 input[type=color] {
-  padding:0;
+  padding: 0;
 }
+
 button:active,
 input[type=submit]:active {
   background-color: #49a09d;
@@ -69,6 +91,7 @@ textarea:focus {
   border: none;
   outline: none;
 }
+
 td[contentEditable=true] {
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8);
 }
@@ -89,7 +112,8 @@ td[contentEditable=true] {
 #show-toggle {
   cursor: pointer;
   position: absolute;
-  right: 0;
+  right: 5px;
+  transform: translateY(50%);
 }
 
 #code-table {
@@ -106,9 +130,11 @@ td[contentEditable=true] {
   text-align: left;
   padding: 8px;
 }
+
 #code-table td:nth-child(1) {
   min-width: 5em;
 }
+
 #code-table td:nth-child(2) {
   word-wrap: anywhere;
 }
@@ -117,7 +143,7 @@ td[contentEditable=true] {
   color: inherit;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (width < 800px) {
   :root {
     font-size: large;
     text-align: center;
@@ -135,22 +161,28 @@ td[contentEditable=true] {
     font-size: 1.2em;
   }
 
-  input:not([type=submit]) {
-    width: 100%;
+  button,
+  input[type=submit],
+  input[type=color] {
+    width: 90vw;
   }
 
-  input[type=color] {
-    width: 33%;
-    height: 3rem;
-  }
   #url {
     width: 100%;
   }
+
   label {
     position: absolute;
-    bottom: -100px;
+    right: -1000px;
   }
+
   input[type=color] {
     display: inline;
+  }
+}
+
+@media screen and (width < 400px) {
+  #code-table {
+    display: none;
   }
 }
