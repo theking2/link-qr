@@ -76,7 +76,11 @@ input[type=color] {
 input[type=color] {
   padding: 0;
 }
-
+:focus-visible {
+  outline-style: dashed;
+  outline-color: rgba(0 0 0 0.5);
+  outline-offset: 2px;
+}
 button:active,
 input[type=submit]:active {
   background-color: hsl(2,145%,84%);
