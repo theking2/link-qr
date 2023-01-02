@@ -16,7 +16,7 @@ class UserEmail extends \Persist\Base
   protected ?\DateTime $register_date;
 
 
-  static public function getPrimaryKey(): string { return 'username'; }
+  static public function getPrimaryKey(): string { return 'email'; }
   static public function getTableName(): string { return 'user_email'; }
   static public function getFields(): array
   {
