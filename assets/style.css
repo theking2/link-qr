@@ -172,8 +172,7 @@ td[contentEditable=true] {
   }
 
   label {
-    position: absolute;
-    right: -1000px;
+    display: none;
   }
 
   input[type=color] {
