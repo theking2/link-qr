@@ -14,9 +14,6 @@ class User extends \Persist\Base
   protected ?string $vorname;
   protected ?string $nachname;
   protected ?string $hash;
-  protected ?string $uuid;
-  protected ?string $email;
-  protected ?\DateTime $last_update;
   protected ?\DateTime $last_login;
 
 
@@ -30,9 +27,6 @@ class User extends \Persist\Base
       'vorname' => ['string', 30],
       'nachname' => ['string', 30],
       'hash' => ['string', 255],
-      'uuid' => ['string', 64],
-      'email' => ['string', 255],
-      'last_update' => ['\DateTime',0],
       'last_login' => ['\DateTime'],
     ];
   }
