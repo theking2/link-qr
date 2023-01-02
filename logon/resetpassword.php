@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Persist\DB\Database;
+
 require_once '../inc/session.inc.php';
 require_once '../inc/utils.inc.php';
 require_once '../inc/settings.inc.php';
@@ -15,7 +17,7 @@ if( isset($_POST['action']) ) {
      * In this case we can change the email adress
      * @var \Link\User $user
      */
-    $user = \Link\User::find(where: ['USERNAME' => $_SESSION['username']]);
+    $user = \Link\User::find(where: ['username' => $_SESSION['username']]);
     if( is_null($user) ) {
       $messages[] = "Benutzername nicht gefunden";
 
@@ -40,8 +42,7 @@ if( isset($_POST['action']) ) {
      * find user by email if provided
      * @var \Link\User $user
      */
-    $user = \Link\User::find(where: ['email' => $_POST['email']]);
-    if (is_null($user)) {
+    if (is_null( $user = \Link\UserEmail::find(where: ['email'=> $_POST['email']]) )) {
       $messages[] = "Zuerst anmelden mit aktuellem Benutzernamen";
 
     } else {
