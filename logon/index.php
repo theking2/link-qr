@@ -23,12 +23,15 @@ require_once "../inc/header.inc.php"; ?>
 		<span id="show-toggle">🔒</span>
 		<span id="capslock-on">Feststelltaste aktiviert!</span>
 	</div>
-	<p></p><input name="action" type="submit" value="Login">
-	<br>
+	<span></span>
+	<input name="action" type="submit" value="Login">
 	<?php if ($retry > 3) { ?>
+		<span></span>
 		<p><a href="resetpassword.php">Passwort vergessen?</a></p>
 	<?php } ?>
-<p><a href="registor.php">Konto erstellen!</a></p>
+
+	<span></span>
+	<p><a href="register.php">Konto erstellen!</a></p>
 </form>
 <main>
 

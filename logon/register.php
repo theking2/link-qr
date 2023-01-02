@@ -40,14 +40,16 @@ if( isset($_POST['action']) ) {
 }
 require_once "../inc/header.inc.php";?>
 <nav id="reports">
-  <h2>Password setzen</h2>
+  <h1>go321</h1>
+  <h2>Konto erstellen</h2>
   <form method="post" id="form-container">
     <label for="username">Username</label>
     <input type="text" name="username" id="username" value="<?= $_SESSION['username'] ?? '' ?>" autofocus required>
     <label for="email">Email-Addresse</label>
     <input id="email" name="email" type="email" placeholder="E-mail" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required>
-
-    <p><input name="action" type="submit" value="Senden"></p>
+    <span></span>
+    <input name="action" type="submit" value="Senden">
+    <span></span>
     <p><a href="index.php">Anmelden</a></p>
   </form>
   <?php
