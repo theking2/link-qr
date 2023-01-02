@@ -69,7 +69,10 @@ require_once "../inc/header.inc.php";?>
       autofocus="autofocus" required
     >
 
-    <p><input name="action" type="submit" value="Senden"></p>
+    <span></span>
+    <Kinput name="action" type="submit" value="Senden">
+
+    <span></span>
     <p><a href="index.php">Anmelden</a></p>
   </form>
   <?php
