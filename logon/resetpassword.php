@@ -26,10 +26,15 @@ if( isset($_POST['action']) ) {
 
     } else {
       try {
-        $user-> createUUID();
-        $user->freeze();
-        $_SESSION['uuid'] = $user-> uuid;
-        $_SESSION['email'] = $user-> email;
+        $user_email = new \Link\UserEmail();
+        $user_email-> username = $_SESSION['username'];
+        $user_email-> email = $_POST['email'];
+        $user_email-> createUUID();
+        $user_email-> confirm_date = null;
+        $user_email-> register_date = new \DateTime();
+        $user_email->freeze();
+        $_SESSION['uuid'] = $user_email-> uuid;
+        $_SESSION['email'] = $user_email-> email;
 
         header('Location:sendpasswordemail.php');
         exit(0);
@@ -92,13 +97,12 @@ require_once "../inc/header.inc.php";?>
 function check_email_unique(string $email):bool {
   global $user;
 
-  $check_user = \Link\User::find(where: ['email' => trim(strtolower($email))]);
+  $check_user = \Link\UserEmail::find(where: ['email' => trim(strtolower($email))]);
   if (is_null($check_user)) {
-    $user-> email = trim(strtolower($email));
     return true;
   } else {
     /** email found, should be the same */
-    return $user-> ID === $check_user-> ID;
+    return $user-> username === $check_user-> username;
   }
 }
 
