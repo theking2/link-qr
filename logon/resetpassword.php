@@ -53,7 +53,7 @@ if( isset($_POST['action']) ) {
   if( $_SESSION['username'] ) {
     $last = Database::getConnection()->prepare("select email from vw_user_email where username=:username");
     $last-> execute(['username'=> $_SESSION['username'] ]);
-    $email = $last-> fetchColumn()??'';
+    $email = $last-> fetchColumn(0)??'';
   }
 }
 require_once "../inc/header.inc.php";?>
