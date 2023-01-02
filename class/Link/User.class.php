@@ -51,8 +51,6 @@ class User extends \Persist\Base
   public function setPasswordHash(string $password) {
     // use the setter to mark as dirty
     $this-> __set('hash', password_hash($password, PASSWORD_ARGON2ID) );
-    $this-> __set('last_update', new \DateTime() );
-    $this-> __set('uuid', null);
   }
   /**
    * Check the password against the hash or to the old style password
