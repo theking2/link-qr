@@ -66,23 +66,32 @@ if(!DEBUG) {
 	mail( $to, $subject, $message, $headers );
 }
 $messages[] = "Eine E-Mail wurde gesendet.";
-?><nav id="reports">
-  <h2>Password setzen</h2>
-
-  <?php
-  if ($messages) {
-
-    foreach ($messages as $message) {
-      echo '<label>' . $message . '</hlabel';
-    }
-  } ?>
-</nav>
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
 <main>
+  <h1>Password setzen</h1>
 	<h2>E-Mail gesendet</h2>
 	<li>Wir haben Ihnen eine E-Mail mit einem Link zum Setzen Ihres Kennworts gesendet.</li>
 	<?php if(DEBUG) { ?>
 		<a href="<?=$url?>"$url><?=$url?></a>
 	<?php } ?>
+
+	<?php
+  if ($messages) {
+		echo'<ul>';
+    foreach ($messages as $message) {
+      echo '<li class="error">' . $message;
+    }
+		echo'</ul>';
+  } ?>
 </main>
 </body>
 
