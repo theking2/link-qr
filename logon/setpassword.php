@@ -37,9 +37,11 @@ if (is_null($user_email)) {
 if (isset($_POST['password'])) {
   $user = \Link\User::find(where: ['username'=> $username]);
   if(is_null($user)) {
-    // create new user after confirm.
+    $user = new \Link\User();
+    $user-> username = $username;
+    $user-> vorname = $user-> nachname = "";
+    $user-> last_login = null;
   }
-
   $user->setPasswordHash($_POST['password']);
   try {
     $user->freeze();
