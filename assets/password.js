@@ -13,8 +13,8 @@ let strong = _('#password-strength #strong');
 let passwordInfo = _('#password-info');
 
 let poorRegExp = /[a-z]/;
-let weakRegExp = /(?=.*?[0-9])/;;
-let strongRegExp = /(?=.*?[#?!@$%^&*-])/;
+let weakRegExp = /(?=.*?[0-9])/;
+let strongRegExp = /(?=.*?[#?!@$%^&*-;,])/;
 let whitespaceRegExp = /^$|\s+/;
 
 /**
