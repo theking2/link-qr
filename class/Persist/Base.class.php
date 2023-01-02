@@ -5,7 +5,7 @@ namespace Persist;
 abstract class Base implements IPersist
 {
 	/** @var bool $_valid true if a valid object contains valid record data */
-  protected bool $_valid;
+  protected bool $_valid = false;
 	public function isValid(): bool { return $this->_valid; }
   
   /** string[] $_dirty contains all modified elements */

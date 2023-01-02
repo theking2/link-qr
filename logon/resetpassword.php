@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Persist\DB\Database;
+
 require_once '../inc/session.inc.php';
 require_once '../inc/utils.inc.php';
 require_once '../inc/settings.inc.php';
@@ -15,7 +17,7 @@ if( isset($_POST['action']) ) {
      * In this case we can change the email adress
      * @var \Link\User $user
      */
-    $user = \Link\User::find(where: ['USERNAME' => $_SESSION['username']]);
+    $user = \Link\User::find(where: ['username' => $_SESSION['username']]);
     if( is_null($user) ) {
       $messages[] = "Benutzername nicht gefunden";
 
@@ -23,25 +25,15 @@ if( isset($_POST['action']) ) {
       $messages[] = "Email Adresse ist bereits vergeben";
 
     } else {
-      try {
-        $user-> createUUID();
-        $user->freeze();
-        $_SESSION['uuid'] = $user-> uuid;
-        $_SESSION['email'] = $user-> email;
-
-        header('Location:sendpasswordemail.php');
-        exit(0);
-      } catch ( \Exception $e ) {
-        $messages[] = "Fehler beim Password setzen. Bitte Administrator kontaktieren.{$e->getMessage()}";
-      }
+      header('Location:sendpasswordemail.php');
+      exit(0);
     }
   } else {
     /**
      * find user by email if provided
      * @var \Link\User $user
      */
-    $user = \Link\User::find(where: ['email' => $_POST['email']]);
-    if (is_null($user)) {
+    if (is_null( $user = \Link\UserEmail::find(where: ['email'=> $_POST['email']]) )) {
       $messages[] = "Zuerst anmelden mit aktuellem Benutzernamen";
 
     } else {
@@ -56,6 +48,13 @@ if( isset($_POST['action']) ) {
       exit(0);
     }
   }
+} else {
+  // if logged on find the email
+  if( $_SESSION['username'] ) {
+    $last = Database::getConnection()->prepare("select email from vw_user_email where username=:username");
+    $last-> execute(['username'=> $_SESSION['username'] ]);
+    $email = $last-> fetchColumn()??'';
+  }
 }
 require_once "../inc/header.inc.php";?>
 <nav id="reports">
@@ -64,7 +63,11 @@ require_once "../inc/header.inc.php";?>
     <label for="username">Username</label>
     <input type="text" disabled name="username" id="username" value="<?= $_SESSION['username'] ?? '' ?>">
     <label for="email">Email-Addresse</label>
-    <input id="email" name="email" type="email" placeholder="E-mail" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" autofocus="autofocus" required>
+    <input id="email" name="email" type="email"
+      value="<?=$email?>"
+      placeholder="E-mail" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+      autofocus="autofocus" required
+    >
 
     <p><input name="action" type="submit" value="Senden"></p>
     <p><a href="index.php">Anmelden</a></p>
@@ -91,14 +94,40 @@ require_once "../inc/header.inc.php";?>
 function check_email_unique(string $email):bool {
   global $user;
 
-  $check_user = \Link\User::find(where: ['email' => trim(strtolower($email))]);
-  if (is_null($check_user)) {
-    $user-> email = trim(strtolower($email));
+  // check if email is currently used by the user
+  $last = Database::getConnection()->prepare("select email from vw_user_email where username=:username");
+  $last-> execute(['username'=> $_SESSION['username'] ]);
+  if($email === $last-> fetchColumn() ) {
+    $user_email = \Link\UserEmail::find(where: ['username'=> $_SESSION['username'],'email' => $email]);
+    $user_email-> createUUID();
+    $user_email-> freeze();
+
+    $_SESSION['uuid'] = $user_email-> uuid;
+    $_SESSION['email'] = $user_email-> email;
+
     return true;
-  } else {
-    /** email found, should be the same */
-    return $user-> ID === $check_user-> ID;
   }
+
+  // check if email was in use by current user
+  $user_email = \Link\UserEmail::find(
+    where: ['username'=> $user->username,'email' => trim(strtolower($email))]
+  );
+  if ($user_email) {
+    // start reuse of email
+    $user_email-> createUUID();
+    $user_email-> confirm_date = null;
+    $user_email-> register_date = new \DateTime();
+    $user_email-> freeze();
+
+    $_SESSION['uuid'] = $user_email-> uuid;
+    $_SESSION['email'] = $user_email-> email;
+    
+    return true;
+  }
+
+  // check if email is in use by another user
+  $user_email = \Link\UserEmail::find(where: ['email' => trim(strtolower($email))]);
+  return !is_null($user_email); // if we found one it is not unique
 }
 
 

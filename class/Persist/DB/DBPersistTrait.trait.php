@@ -107,13 +107,13 @@ trait DBPersistTrait
 	 * @param  mixed $ignore_dirty - if true, only dirty fields are bound
 	 * @return void
 	 */
-	private function bindValueList( \PDOStatement $stmt, ?bool $ignore_dirty=false ): bool
+	private function bindValueList( \PDOStatement $stmt, ?bool $ignore_dirty=false, ?bool $ignore_PK = true ): bool
 	{
 		$result = true;
 		$this-> _insert_buffer = [];
 		foreach( static::getFields( ) as $field=> $description ) {
 			// don't update primary key
-			if( $field === static::getPrimaryKey() ) continue;
+			if( $ignore_PK && $field === static::getPrimaryKey() ) continue;
 			if( $ignore_dirty or in_array( $field, $this-> _dirty ) ) {
 				$result = $result && $stmt->bindValue( ':'.$field, 	$this-> _insert_buffer[] = $this-> getFieldString($field) );
 			}
@@ -196,7 +196,7 @@ trait DBPersistTrait
 	 */
 	public function freeze():bool
 	{
-		if( $this-> isRecord() ) {
+		if( $this-> _valid ) {
 			return $this->update();
 		}
 		return $this->insert();
@@ -269,8 +269,14 @@ trait DBPersistTrait
 	protected function insert(): bool
 	{
 		try {
-			if( $this->getInsertStatement()->execute( ) ) {
-				$this->{$this->getPrimaryKey()} = (int)Database::getConnection( )->lastInsertId( );
+			// check if the PK field was set.
+			// in that case include it in the insert
+			// and don't get it back as last inserted id.
+			$key_set = in_array( $this->getPrimaryKey(), $this-> _dirty );
+			if( $this->getInsertStatement( $key_set )->execute() ) {
+				if(!$key_set) {
+					$this->{$this->getPrimaryKey()} = (int)Database::getConnection( )->lastInsertId( );
+				}
 				$this-> _dirty = [];
 				return true;
 			} else {
@@ -594,14 +600,14 @@ trait DBPersistTrait
 	 * 
 	 * @return \PDOStatement 
 	 */
-	protected function getInsertStatement(): \PDOStatement
+	protected function getInsertStatement(?bool $withID = false): \PDOStatement
 	{
 		if( is_null($this-> insert_statement) ) {
 			$query = sprintf(
 				'insert into %s(%s) values(%s)',
 				static::getTableName(),
-				static::getSelectFields( false ),
-				static::getFieldPlaceholders( false )
+				static::getSelectFields( $withID ),
+				static::getFieldPlaceholders( $withID )
 			);
 
 			$this-> insert_statement = Database::getConnection()-> prepare( $query );
@@ -609,7 +615,7 @@ trait DBPersistTrait
 				throw DatabaseException::createStatementException(
 					Database::getConnection(), "Could not prepare insert statement for {$this->getTableName()}:%s" );
 			}
-			if( !$this-> bindValueList( $this-> insert_statement, true ) ) {
+			if( !$this-> bindValueList( $this-> insert_statement, ignore_PK: !$withID ) ) {
 				throw DatabaseException::createStatementException(
 					Database::getConnection(), "Could not bind insert statement for {$this->getTableName()}:%s" );
 			}

@@ -14,9 +14,6 @@ class User extends \Persist\Base
   protected ?string $vorname;
   protected ?string $nachname;
   protected ?string $hash;
-  protected ?string $uuid;
-  protected ?string $email;
-  protected ?\DateTime $last_update;
   protected ?\DateTime $last_login;
 
 
@@ -30,9 +27,6 @@ class User extends \Persist\Base
       'vorname' => ['string', 30],
       'nachname' => ['string', 30],
       'hash' => ['string', 255],
-      'uuid' => ['string', 64],
-      'email' => ['string', 255],
-      'last_update' => ['\DateTime',0],
       'last_login' => ['\DateTime'],
     ];
   }
@@ -57,8 +51,6 @@ class User extends \Persist\Base
   public function setPasswordHash(string $password) {
     // use the setter to mark as dirty
     $this-> __set('hash', password_hash($password, PASSWORD_ARGON2ID) );
-    $this-> __set('last_update', new \DateTime() );
-    $this-> __set('uuid', null);
   }
   /**
    * Check the password against the hash or to the old style password

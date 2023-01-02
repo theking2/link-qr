@@ -23,12 +23,11 @@ if( isset($_POST['action']) ) {
     $user-> freeze();
 		$_SESSION['user_id'] = $user-> id;
 		$_SESSION['username'] = $user-> username;
-		$_SESSION['email'] = $user-> email;
 		$_SESSION['failed attempt'] = 0;
    	header( "Location: /" );
 		
   } else {
-    header('Location: /logon?s='.$script);
+    header('Location: ./' );
     error_log('['.date('Y-m-d H:i:s').'] '.__FILE__.':'.__LINE__.':Logon error for user '.$_POST['username']);
     exit();
   }
