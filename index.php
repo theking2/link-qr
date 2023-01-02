@@ -79,7 +79,7 @@ if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))
 
 		<h1>go321</h1>
 		<a href="/logon">Abmelden</a>
-		<h2>Bekannte Codes</h2>
+		<h2>Von dir registrierten Codes</h2>
 		<p>Auf URL klicken um zu ändern, zum Bestätigen Eingabe-Taste, Esc. für Abbbrechen</p>
 		<table id="code-table">
 			<tr>
@@ -100,7 +100,7 @@ if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))
 			}
 			?>
 		</table>
-		<h2>Edit</h2>
+		<h2>Erstellen</h2>
 		<p>URL eingeben und Farben/Grösse einstellen
 		<p>Klick auf QR Code für Download.
 		<p>Kürzen mit Enter-Taste. Gekürzt werden nur längere URLs.
