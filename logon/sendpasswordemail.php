@@ -79,7 +79,7 @@ $messages[] = "Eine E-Mail wurde gesendet.";
 <main>
   <h1>Password setzen</h1>
 	<h2>E-Mail gesendet</h2>
-	<li>Wir haben Ihnen eine E-Mail mit einem Link zum Setzen Ihres Kennworts gesendet.</li>
+	<p>Wir haben Ihnen eine E-Mail mit einem Link zum Setzen Ihres Kennworts gesendet.</p>
 	<?php if(DEBUG) { ?>
 		<a href="<?=$url?>"$url><?=$url?></a>
 	<?php } ?>
