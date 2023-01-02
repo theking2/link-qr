@@ -25,8 +25,8 @@ if (!isset($_GET['vc']) || !isset($_GET['username'])) {
 $uuid = $_GET['vc'];
 $username = $_GET['username'];
 
-$user = \Link\User::find(where: ['uuid' => $uuid, 'username' => $username]);
-if (is_null($user)) {
+$user_email = \Link\UserEmail::find(where: ['uuid' => $uuid, 'username' => $username]);
+if (is_null($user_email)) {
   $username = $_GET['username'];
   $messages[] = sprintf("User %s not found", $username);
   error_log("password reset fail $username not found ($uuid)");
@@ -35,9 +35,17 @@ if (is_null($user)) {
 }
 
 if (isset($_POST['password'])) {
+  $user = \Link\User::find(where: ['username'=> $username]);
+  if(is_null($user)) {
+    // create new user after confirm.
+  }
+
   $user->setPasswordHash($_POST['password']);
   try {
     $user->freeze();
+    $user_email-> confirm_date = new \DateTime();
+    $user_email-> uuid = null;
+    $user_email-> freeze();
     sendUpdateEmail();
     header('Location:../');
   } catch (\Exception $e) {
@@ -50,7 +58,7 @@ require_once "../inc/header.inc.php"; ?>
 <h2>Kennwort zurücksetzen</h2>
 <form method='POST' id='form-container'>
   <label>Username</label>
-  <input type="text" disabled value="<?= $user->username ?>">
+  <input type="text" disabled value="<?= $user_email->username ?>">
   <label for='password'>Password</label>
   <div id="password-input">
     <input type='password' name='password' id='password' required minlength="5">
@@ -87,15 +95,15 @@ if ($messages) {
 
         function sendUpdateEmail()
         {
-          global $user;
+          global $user_email;
 
-          $to      = $user->email;
+          $to      = $user_email->email;
           $subject = "LINK Kennwort geändert";
           $headers = ''
             . 'From: ' . 'hostmaster@king.ma' . PHP_EOL
             . 'MIME-Version: 1.0' . PHP_EOL
             . 'Content-type: text/html; charset=utf-8' . PHP_EOL;
-          $message = sprintf(SEND_PWD_TEMPLATE, $user->username, $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']);
+          $message = sprintf(SEND_PWD_TEMPLATE, $user_email->username, $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']);
           if (!DEBUG) {
             mail($to, $subject, $message, $headers);
           }

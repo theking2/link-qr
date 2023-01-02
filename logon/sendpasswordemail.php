@@ -4,6 +4,7 @@ require_once '../inc/settings.inc.php';
 require_once '../inc/connect.inc.php';
 require_once '../inc/utils.inc.php';
 
+const SENDER_EMAIL = 'hostmaster@king.ma';
 const SEND_PWD_TEMPLATE = '<html>
 <head>
 <style type="text/css">
@@ -52,7 +53,7 @@ $url = getCurrentUrlPath() . "/setpassword.php?vc=$uuid&username=$username";
 $to      = $email;
 $subject = "LINK Kennwort zurücksetzen";
 $headers = ''
-.'From: ' . 'hostmaster@king.ma' . PHP_EOL
+.'From: ' . SENDER_EMAIL . PHP_EOL
 .'MIME-Version: 1.0'.PHP_EOL
 .'Content-type: text/html; charset=utf-8'.PHP_EOL
 ;
