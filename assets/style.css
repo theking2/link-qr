@@ -4,7 +4,7 @@
 }
 
 body {
-  background: linear-gradient(45deg, #49a09d, #5f2c82);
+  background: linear-gradient(35deg, hsl(178,37%,46%), hsl(276,49%,34%));
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
@@ -60,7 +60,7 @@ button {
 
 textarea,
 input:not([type=submit]):not([type=color]):not([type=range]) {
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 0 8px rgba(0,0,0, 0.8);
   border: none;
 }
 
@@ -69,17 +69,21 @@ input[type=submit],
 input[type=color] {
   font: inherit;
   color: inherit;
-  border: 3px groove #49a09d;
+  border: 3px groove hsl(2,145%,84%);
   width: 100%;
 }
 
 input[type=color] {
   padding: 0;
 }
-
+:focus-visible {
+  outline-style: dashed;
+  outline-color: rgba(0 0 0 0.5);
+  outline-offset: 2px;
+}
 button:active,
 input[type=submit]:active {
-  background-color: #49a09d;
+  background-color: hsl(2,145%,84%);
   border-style: inset;
 }
 
@@ -92,8 +96,10 @@ textarea:focus {
   outline: none;
 }
 
-td[contentEditable=true] {
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8);
+#code-table td[contentEditable=true] {
+  box-shadow: inset 0 0 8px hsla(2,145%,84%,0.8);
+  outline: 1px solid hsl(2,145,84);
+  border-color: hsl(2,145%,84%);
 }
 
 #url {
@@ -121,7 +127,7 @@ td[contentEditable=true] {
   max-width: 800px;
   border-collapse: collapse;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(90deg, #49a09d, #5f2c82);
+  background: linear-gradient(90deg,hsl(178,37%,46%),hsl(276,49%,34%));
 }
 
 #code-table th,
