@@ -77,7 +77,7 @@ if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))
 <body>
 	<main>
 
-		<h1>Code-Generator</h1>
+		<h1>go321</h1>
 		<a href="/logon">Abmelden</a>
 		<h2>Bekannte Codes</h2>
 		<p>Auf URL klicken um zu ändern, zum Bestätigen Eingabe-Taste, Esc. für Abbbrechen</p>
