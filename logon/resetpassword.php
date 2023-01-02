@@ -70,7 +70,7 @@ require_once "../inc/header.inc.php";?>
     >
 
     <span></span>
-    <Kinput name="action" type="submit" value="Senden">
+    <input name="action" type="submit" value="Senden">
 
     <span></span>
     <p><a href="index.php">Anmelden</a></p>
