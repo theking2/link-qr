@@ -28,9 +28,8 @@ require_once "../inc/header.inc.php"; ?>
 	<?php if ($retry > 3) { ?>
 		<p><a href="resetpassword.php">Passwort vergessen?</a></p>
 	<?php } ?>
-
+<p><a href="registor.php">Konto erstellen!</a></p>
 </form>
-</nav>
 <main>
 
 
