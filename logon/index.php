@@ -16,7 +16,7 @@ require_once "../inc/header.inc.php"; ?>
 <h2>LOGIN</h2>
 <form action="logon.php" method="post" id="form-container">
 	<label for="username">Username</label>
-	<input id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" required>
+	<input id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" autocomplete="false" required>
 	<label for="password">Password</label>
 	<div id="password-input">
 		<input type='password' name='password' id='password' required>
