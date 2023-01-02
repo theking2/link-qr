@@ -51,7 +51,7 @@ if( strlen($uuid) == 0 ) {
 $url = getCurrentUrlPath() . "/setpassword.php?vc=$uuid&username=$username";
 
 $to      = $email;
-$subject = "LINK Kennwort zurücksetzen";
+$subject = "go321 Kennwort zurücksetzen";
 $headers = ''
 .'From: ' . SENDER_EMAIL . PHP_EOL
 .'MIME-Version: 1.0'.PHP_EOL

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
   <head>
-		<title>QR maker</title>
+		<title>go 321</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/lib/qrcode.js" defer></script>

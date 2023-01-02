@@ -100,7 +100,7 @@ if ($messages) {
           global $user_email;
 
           $to      = $user_email->email;
-          $subject = "LINK Kennwort geändert";
+          $subject = "go321 Kennwort geändert";
           $headers = ''
             . 'From: ' . 'hostmaster@king.ma' . PHP_EOL
             . 'MIME-Version: 1.0' . PHP_EOL
