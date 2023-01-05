@@ -39,9 +39,11 @@ if( isset($_POST['action']) ) {
   }
 }
 require_once "../inc/header.inc.php";?>
-<nav id="reports">
+<main>
+
   <h1>go321</h1>
   <h2>Konto erstellen</h2>
+  <dialog open>
   <form method="post" id="form-container">
     <label for="username">Username</label>
     <input type="text" name="username" id="username" value="<?= $_SESSION['username'] ?? '' ?>" autofocus required>
@@ -59,7 +61,7 @@ require_once "../inc/header.inc.php";?>
       echo '<h2>' . $message . '</h2>';
     }
   } ?>
-<main>
+  </dialog>
 
 
 </main>

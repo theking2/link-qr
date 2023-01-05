@@ -57,6 +57,7 @@ if (isset($_POST['password'])) {
 }
 require_once "../inc/header.inc.php"; ?>
 <main>
+<dialog open>
 <h2>Kennwort zurücksetzen</h2>
 <form method='POST' id='form-container'>
   <label>Username</label>
@@ -84,6 +85,7 @@ if ($messages) {
   }
 }
 ?>
+</dialog>
 </main>
 </body>
 <script defer src="/assets/password.js"></script>
