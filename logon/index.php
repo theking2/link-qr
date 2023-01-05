@@ -11,9 +11,9 @@ require_once "../inc/utils.inc.php";
 require_once "../inc/header.inc.php"; ?>
 <main>
 
-	<h1>Code-Generator</h1>
+	<h1>go321</h1>
 
-	<h2>LOGIN</h2>
+	<h2>Anmeldung</h2>
 	<form action="logon.php" method="post" id="form-container">
 		<label for="username">Username</label>
 		<input id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" autocomplete="off" required>
