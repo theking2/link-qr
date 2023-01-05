@@ -13,6 +13,7 @@ require_once "../inc/header.inc.php"; ?>
 
 	<h1>go321</h1>
 
+	<dialog open>
 	<h2>Anmeldung</h2>
 	<form action="logon.php" method="post" id="form-container">
 		<label for="username">Username</label>
@@ -33,7 +34,7 @@ require_once "../inc/header.inc.php"; ?>
 		<span></span>
 		<p><a href="register.php">Konto erstellen!</a></p>
 	</form>
-
+	</dialog>
 </main>
 </body>
 <script defer src="/assets/password.js"></script>
