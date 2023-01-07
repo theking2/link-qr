@@ -18,6 +18,7 @@
   padding: 8px
 
 #code-table td:nth-child(1)
+  width: 5em
   min-width: 5em
 
 #code-table td:nth-child(2)
@@ -30,3 +31,15 @@
   box-shadow: inset 0 0 0.75em hsl(2 145% 84% / 80%)
   border-color: hsl(2 145% 84%)
 
+td
+  max-width: 0
+  white-space: nowrap
+  overflow-wrap: break-word
+  overflow: hidden
+  text-overflow: ellipsis
+  &[contentEditable=true]
+    max-width: none
+    white-space: pre-wrap
+    overflow-wrap: break-word
+    overflow: visible
+    text-overflow: initial
