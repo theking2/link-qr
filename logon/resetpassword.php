@@ -9,6 +9,8 @@ require_once '../inc/utils.inc.php';
 require_once '../inc/settings.inc.php';
 
 $messages = [];
+$email = '';
+$username = '';
 
 if( isset($_POST['action']) ) {
   if( isset($_SESSION['username']) ) {
@@ -50,14 +52,16 @@ if( isset($_POST['action']) ) {
   }
 } else {
   // if logged on find the email
-  if( $_SESSION['username'] ) {
+  if( array_key_exists('username',$_SESSION) ) {
     $last = Database::getConnection()->prepare("select email from vw_user_email where username=:username");
     $last-> execute(['username'=> $_SESSION['username'] ]);
     $email = $last-> fetchColumn(0)??'';
   }
 }
 require_once "../inc/header.inc.php";?>
-<nav id="reports">
+<main>
+<h1>go321</h1>
+<dialog open>
   <h2>Password setzen</h2>
   <form method="post" id="form-container">
     <label for="username">Username</label>
@@ -82,9 +86,8 @@ require_once "../inc/header.inc.php";?>
       echo '<h2>' . $message . '</h2>';
     }
   } ?>
-<main>
 
-
+</dialog>
 </main>
 </body>
 
