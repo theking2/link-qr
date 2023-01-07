@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 require_once './inc/settings.inc.php';
 require_once './inc/utils.inc.php';
@@ -26,8 +24,8 @@ if (array_key_exists('code', $_GET)) {
 }
 
 
-define('base_url', $settings['base_url']);
-define('default_url', $settings['default_url']);
+define('BASE_URL', $settings['BASE_URL']);
+define('DEFAULT_URL', $settings['DEFAULT_URL']);
 
 require_once './inc/session.inc.php';
 
@@ -37,9 +35,9 @@ if (!array_key_exists('user_id', $_SESSION)) {
 }
 
 // test for url but ignore our own
-if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))) {
+if( array_key_exists('url', $_GET) and (false === strpos($_GET['url'], BASE_URL)) ) {
 	$url = trim($_GET['url']);
-	if (strlen($url) < strlen(base_url) + 8) {
+	if (strlen($url) < strlen(BASE_URL) + 8) {
 		// don't make longer urls
 		$full_url = $url;
 	} else {
@@ -51,14 +49,14 @@ if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))
 
 		//echo $select-> errorInfo()[2];
 		if ($code = $select->fetchColumn()) {
-			$url = base_url . $code;
+			$url = BASE_URL . $code;
 		} else {
-			$url = default_url;
+			$url = DEFAULT_URL;
 		}
 	}
 } else {
 	// nothing to do get the default
-	$url = $full_url = default_url;
+	$url = $full_url = DEFAULT_URL;
 }
 //var_dump($_GET);
 
@@ -72,6 +70,7 @@ if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="./lib/qrcode.js" defer></script>
 	<link rel="stylesheet" href="./assets/main.css">
+	<?=$_GET['url']?>
 </head>
 
 <body>
@@ -89,9 +88,6 @@ if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))
 			<?php
 			foreach (\Link\Code::findAll(where: ['user_id' => $_SESSION['user_id']]) as $code) {
 				echo '<tr>';
-				$baseUrl = $_SERVER['REQUEST_SCHEME']
-					. '://' . $_SERVER['HTTP_HOST']
-					. $_SERVER['REQUEST_URI'];
 				echo wrap_tag(
 					'td',
 					"<a target=\"_blank\" href=\"/$code->code\">$code->code</a>"
@@ -129,7 +125,7 @@ if (array_key_exists('url', $_GET) && (false === strpos($_GET['url'], base_url))
 
 			<span>QR-Code</span>
 			<div id="container"></div>
-			<input id="base-url" type="hidden" value="<?= base_url ?>">
+			<input id="base-url" type="hidden" value="<?= BASE_URL ?>">
 		</form>
 
 		<script src="./assets/main.js"></script>
