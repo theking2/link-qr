@@ -242,6 +242,7 @@ trait DBPersistTrait
 						throw new \Exception("Unknown type for primary key");
 				}
 				$this-> _dirty = [];
+				$this-> _valid = true;
 				return $this;
 			} else {
 				$this-> {$this->getPrimaryKey()} = null;
