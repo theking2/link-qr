@@ -1,0 +1,227 @@
+:root {
+  font: normal 12px/1.2 Verdana;
+  color: white;
+}
+
+body {
+  background: linear-gradient(35deg, hsl(178 37% 46%), hsl(276 49% 34%));
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0.2rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom: 2px solid white;
+}
+
+dialog a:hover {
+  border-bottom-color: hsl(276 49% 34%);
+}
+
+dialog {
+  border: none;
+  box-shadow:0 0 40px hsl(0deg 0% 0% / 20%);
+  background-color: hsl(178 37% 46%);
+  color: inherit;
+}
+dialog h2 {
+  text-align: center;
+}
+main {
+  margin: 0 auto;
+  padding: 1em;
+  min-height: 100vh;
+}
+
+#form-container {
+  padding: 10px;
+  /* max-width: 300px; */
+  display: grid;
+  grid-template-columns: 120px 200px;
+  grid-row-gap: 1em;
+}
+
+label {
+  text-align: right;
+  padding-block-start: 0.5em;
+  margin-inline-end: 1em;
+}
+
+label::after {
+  content: ":";
+}
+
+textarea,
+input,
+button {
+  font: inherit;
+  color: inherit;
+  padding: 8px;
+  outline: none;
+  background-color: transparent;
+  border-radius: 3px;
+}
+
+textarea,
+input:not([type=submit]):not([type=color]):not([type=range]) {
+  box-shadow: inset 0 0 8px rgba(0 0 0 / 80%);
+  border: none;
+}
+
+button,
+input[type=submit],
+input[type=color] {
+  font: inherit;
+  color: inherit;
+  border: 3px groove hsl(2, 145%, 84%);
+  width: 100%;
+}
+
+input[type=color] {
+  padding: 0;
+}
+
+:focus-visible {
+  outline-style: dashed;
+  outline-color: rgba(0 0 0 / 50%);
+  outline-offset: 2px;
+}
+
+button:active,
+input[type=submit]:active {
+  background-color: hsl(2, 145%, 84%);
+  border-style: inset;
+}
+
+td[contentEditable=true],
+input:not([type=submit]):focus,
+textarea:focus {
+  background-color: white;
+  color: black;
+  border: none;
+  outline: none;
+}
+
+#code-table td[contentEditable=true] {
+  box-shadow: inset 0 0 8px hsl(2 145% 84% / 80%);
+  outline: 1px solid hsl(2 145 84);
+  border-color: hsl(2 145% 84%);
+}
+
+#url {
+  width: 300px;
+  height: 5em;
+}
+
+#container {
+  margin: 0 auto;
+}
+
+#password-input {
+  position: relative;
+}
+
+#show-toggle {
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  transform: translateY(50%);
+}
+
+#code-table {
+  width: 100%;
+  max-width: 800px;
+  border-collapse: collapse;
+  box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+  background: linear-gradient(90deg, hsl(178 37% 46%), hsl(276 49% 34%));
+}
+
+#code-table th,
+#code-table td {
+  border: 1pt solid white;
+  text-align: left;
+  padding: 8px;
+}
+
+#code-table td:nth-child(1) {
+  min-width: 5em;
+}
+
+#code-table td:nth-child(2) {
+  word-wrap: anywhere;
+}
+
+#code-table a {
+  color: inherit;
+}
+
+@media screen and (width < 800px) {
+  :root {
+    font-size: large;
+    text-align: center;
+  }
+
+  dialog {
+    width: 100%;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  dialog a:hover {
+    border-bottom-color: white;
+  }
+
+
+  #form-container {
+    max-width: 100%;
+    grid-row-gap: 0.75em;
+    grid-template-columns: 100%;
+    justify-items: center;
+  }
+
+  input,
+  button {
+    font-size: 1.2em;
+  }
+
+  button,
+  input[type=submit],
+  input[type=color] {
+    width: 90vw;
+  }
+
+  #url {
+    width: 100%;
+  }
+
+  label {
+    display: none;
+  }
+
+  input[type=color] {
+    display: inline;
+  }
+}
+
+@media screen and (width < 400px) {
+  #code-table {
+    display: none;
+  }
+}
+
+@media (hover: none) {
+  a {
+    border-bottom: 2px solid white;
+  }
+}
