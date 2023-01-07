@@ -198,7 +198,7 @@ async function doSetUrl(code, url) {
   let body = { url: url };
   let options = { method: 'PUT', body: JSON.stringify(body) }
 
-  const response = await fetch(api + '/Code?code=' + code, options);
+  const response = await fetch( `${api}/Code/${code}`, options );
   if (!response.ok) {
     console.error(response);
   } else {
