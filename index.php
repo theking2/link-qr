@@ -24,8 +24,8 @@ if (array_key_exists('code', $_GET)) {
 }
 
 
-define('BASE_URL', $settings['BASE_URL']);
-define('DEFAULT_URL', $settings['DEFAULT_URL']);
+define('BASE_URL', $settings['base_url']);
+define('DEFAULT_URL', $settings['default_url']);
 
 require_once './inc/session.inc.php';
 
