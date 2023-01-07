@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 use Persist\DB\Database;
 
@@ -36,7 +34,7 @@ if( isset($_POST['action']) ) {
      * @var \Link\User $user
      */
     if (is_null( $user = \Link\UserEmail::find(where: ['email'=> $_POST['email']]) )) {
-      $messages[] = "Zuerst anmelden mit aktuellem Benutzernamen";
+      $messages[] = "Email Adresse nicht gefunden";
 
     } else {
       $user-> createUUID();
