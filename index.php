@@ -70,7 +70,6 @@ if( array_key_exists('url', $_GET) and (false === strpos($_GET['url'], BASE_URL)
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="./lib/qrcode.js" defer></script>
 	<link rel="stylesheet" href="./assets/main.css">
-	<?=$_GET['url']?>
 </head>
 
 <body>
