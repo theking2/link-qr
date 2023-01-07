@@ -1,0 +1,13 @@
+$base-color: white
+$base-color-selected: black
+
+$black-50: hsl(0deg 0% 0% / 50%)
+
+$design-color-one: hsl(178deg 37% 46%)
+$design-color-two: hsl(276deg 49% 34%)
+$design-color-three: hsl(1deg 145% 84%)
+$form-first-color: white
+
+@mixin design-gradient($angle)
+  background: linear-gradient($angle, $design-color-one, $design-color-two)
+

@@ -1,0 +1,32 @@
+@use "variables" as *
+
+#code-table
+  width: 100%
+  max-width: 800px
+  border-collapse: collapse
+  box-shadow: 0 0 20px $black-50
+  background: linear-gradient(90deg, $design-color-one, $design-color-two)
+  @media screen and (width < 400px)
+    &
+      display: none
+
+
+#code-table th,
+#code-table td
+  border: 1pt solid $base-color
+  text-align: left
+  padding: 8px
+
+#code-table td:nth-child(1)
+  min-width: 5em
+
+#code-table td:nth-child(2)
+  word-wrap: anywhere
+
+#code-table a
+  color: inherit
+
+#code-table td[contentEditable=true]
+  box-shadow: inset 0 0 0.75em hsl(2 145% 84% / 80%)
+  border-color: hsl(2 145% 84%)
+

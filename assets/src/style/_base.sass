@@ -1,0 +1,32 @@
+@use "variables" as *
+
+:root
+  font: normal 12px/1.2 Verdana
+  color: white
+
+
+body
+  background: linear-gradient(35deg, $design-color-one, $design-color-two)
+  background-repeat: no-repeat
+  margin: 0
+  padding: 0
+
+p
+  margin: 0.2rem
+
+a
+  color: inherit
+  text-decoration: none
+
+  @media (hover: none)
+    a
+      border-bottom: 2px solid $base-color
+
+  &:hover
+    border-bottom: 2px solid $base-color
+
+
+@media screen and (width < 800px)
+  :root
+    font-size: clamp(10px, 2.5vmin, 18px)
+    text-align: center
