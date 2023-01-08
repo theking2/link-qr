@@ -24,7 +24,11 @@ if (array_key_exists('code', $_GET)) {
 }
 
 
-define('BASE_URL', $settings['base_url']);
+define( 'BASE_URL', 
+	($_SERVER['HTTPS']? 'https://': 'http://') .
+	$_SERVER['HTTP_HOST'] .
+	'/' 
+);
 define('DEFAULT_URL', $settings['default_url']);
 
 require_once './inc/session.inc.php';
