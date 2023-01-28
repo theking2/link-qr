@@ -36,6 +36,9 @@ require_once "../inc/header.inc.php"; ?>
 	</form>
 	</dialog>
 </main>
+<footer>
+	<a href="../impressum.html¨>IMPRESSUM</a>
+</footer>
 </body>
 <script defer src="/assets/password.js"></script>
 
