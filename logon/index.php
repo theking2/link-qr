@@ -32,7 +32,7 @@ require_once "../inc/header.inc.php"; ?>
 		<?php } ?>
 
 		<span></span>
-		<p><a href="register.php">Konto erstellen!</a></p>
+		<p><a href="register.php">Gratis Konto erstellen!</a></p>
 	</form>
 	</dialog>
 </main>
