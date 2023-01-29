@@ -15,17 +15,16 @@ passwort = 'pass'
 
 ## Tables and views
 ```sql
-CREATE TABLE `code` (
+CREATE TABLE IF NOT EXISTS `code` (
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `code` char(5) COLLATE latin1_bin NOT NULL,
   `url` varchar(4096) COLLATE latin1_bin DEFAULT NULL,
   `last_used` datetime NOT NULL DEFAULT current_timestamp(),
   `hits` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `url_sha` varbinary(32) GENERATED ALWAYS AS (unhex(sha2(`url`,256))) STORED
+  `url_md5_l` bigint(20) UNSIGNED GENERATED ALWAYS AS (conv(left(md5(`url`),16),16,10)) STORED,
+  `url_md5_r` bigint(20) UNSIGNED GENERATED ALWAYS AS (conv(right(md5(`url`),16),16,10)) STORED,
+  PRIMARY KEY (`code`) USING HASH
 ) ENGINE=Aria DEFAULT CHARSET=latin1 COLLATE=latin1_bin PACK_KEYS=0;
-ALTER TABLE `code`
-  ADD PRIMARY KEY (`code`) USING HASH,
-  ADD UNIQUE KEY `url_sha` (`url_sha`);
 
 CREATE TABLE `user` (
   `id` int(10) NOT NULL,
@@ -91,7 +90,9 @@ CREATE FUNCTION `set_url` (`the_user_id` INT, `the_url` VARCHAR(4096))
   begin
     declare result char(5);
 
-    select `code` into result from `code` where url_sha = unhex(sha2(the_url,256)) limit 1;
+    select `code` into result from `code`
+    where url_md5_l=conv(left(md5(the_url),16),16,10)
+      and url_md5_r=conv(right(md5(the_url),16),16,10) limit 1;
     if result is null then
       select `code` into result from `code` where url is null limit 1;
 		  update `code` set user_id=the_user_id, url=the_url where `code`=result;
