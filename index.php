@@ -130,6 +130,7 @@ if( array_key_exists('url', $_GET) and (false === strpos($_GET['url'], BASE_URL)
 			<div id="container"></div>
 			<input id="base-url" type="hidden" value="<?= BASE_URL ?>">
 		</form>
+		<p><a href="./impressum.html">IMPRESSUM</a></p>
 
 		<script src="./assets/main.js"></script>
 	</main>
