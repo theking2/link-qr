@@ -34,6 +34,7 @@ require_once "../inc/header.inc.php"; ?>
 		<span></span>
 		<p><a href="register.php">Gratis Konto erstellen!</a></p>
 	</form>
+	<p><a href="./impressum.html">IMPRESSUM</a></p>
 	</dialog>
 </main>
 <footer>
