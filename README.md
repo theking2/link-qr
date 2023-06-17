@@ -2,7 +2,7 @@
 # Config
 Create a file `app.conf` with this content
 ```
-base_url = 'https://your-domain.orch/'
+base_url = 'http://your-domain.orch/'
 default_url = 'https://de.wikipedia.org/'
 
 [db]
