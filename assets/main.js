@@ -45,6 +45,7 @@ const doRowClick = row => {
   if (row && $("td", row).length === 0) return false;
 
   $("#url").value = $("#base-url").value + $("td", row)[0].textContent;
+  $('#shorten').dataset.fullUrl = $("td", row)[1].textContent
   document.getElementById("do-qr").click()
 
   let cellCode = $("td", row)[0];
