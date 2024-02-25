@@ -112,6 +112,5 @@ Watch live on [go321.eu](https://go321.eu) or[go321.ch](https://go321.ch)
 
 or (white on black)
 
-![image](https://github.com/theking2/link-qr/assets/1612152/20261284-0d8e-416e-a60f-e4059faaf617)
-
+![Screen Shot 2024-02-25 at 21 00 46](https://github.com/theking2/link-qr/assets/1612152/99d0960e-b297-4d82-8b80-1732f771fc34)
 
