@@ -2,11 +2,7 @@
 namespace Link;
 require '../inc/settings.inc.php';
 require '../inc/utils.inc.php';
-require '../inc/session.inc.php';
-if( !array_key_exists('user_id', $_SESSION) ) {
-  sendResponse(unprocessableEntityResponse());
-  exit(0);
-}
+
 /**
  * api has the following endpoints:
  * Request methods allowed: GET, POST, PUT, DELETE, OPTIONS
@@ -38,6 +34,7 @@ if( !array_key_exists('user_id', $_SESSION) ) {
 $allowed = ['Code'];	
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
+
 /**
  * get the endpoint from the request
  * e.g. /api/index.php/<endpoint>[/<id>] or /api/index.php/<endpoint>?<query>
@@ -58,8 +55,13 @@ if( !isEntityValid($uri[0]) ) {
   sendResponse(notFoundResponse());
   exit();
 }
-
+/* early response to GETs */
+if( "GET" === $requestMethod ) {
+	sendResponse( doGet( $uri ) );
+	exit();
+}
 /**
+
  * set the query string if query is present
  */
 if( $query ) {
@@ -70,6 +72,10 @@ unset($path, $query);
 // prepend the namespace
 $uri[0] = __NAMESPACE__ . '\\' . $uri[0];
 
+require '../inc/session.inc.php';
+if( !array_key_exists('user_id', $_SESSION) ) {
+  sendResponse(unprocessableEntityResponse());
+}
 switch($requestMethod) {
   case 'GET':     $response = doGet($uri);     break;
   case 'POST':    $response = doCreate($uri);  break;
@@ -130,7 +136,7 @@ function sendResponse(array $response): void
   header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
   if ($response['body']) {
-    echo $response['body'];
+    exit( $response['body'] );
   }
 }
 
