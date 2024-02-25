@@ -103,5 +103,15 @@ DELIMITER ;
 
 ```
 
-
+##
 Watch live on [go321.eu](https://go321.eu) or[go321.ch](https://go321.ch)
+
+[beispiel](http://go321.eu/aaaaa)
+
+![image](https://github.com/theking2/link-qr/assets/1612152/d3e2dce5-ed13-4a95-b5a9-dcd814dcfb66)
+
+or (white on black)
+
+![image](https://github.com/theking2/link-qr/assets/1612152/20261284-0d8e-416e-a60f-e4059faaf617)
+
+
