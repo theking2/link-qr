@@ -6,7 +6,7 @@ base_url = 'http://your-domain.tld/'
 default_url = 'https://de.wikipedia.org/'
 
 [db]
-server = p:localhost
+server = localhost
 name = 'schema'
 user = 'user'
 passwort = 'pass'
