@@ -3,34 +3,35 @@ require_once '../inc/session.inc.php';
 require_once '../inc/settings.inc.php';
 require_once "../inc/utils.inc.php";
 
-$script = $_POST['script']??$_GET['s']??'';
+$script = $_POST['script'] ?? $_GET['s'] ?? '';
 /**
  * do we have a logon attempt?
  */
-if( !array_key_exists('username', $_POST) or strlen($_POST['username']) === 0 ) {
+if( !array_key_exists( 'username', $_POST ) or strlen( $_POST['username'] ) === 0 ) {
 	// no logon attempt
 	// redirect to login page
-	header("Location: ./");
+	header( "Location: ./" );
 	exit;
 }
 
-if( isset($_POST['action']) ) {
-	$user = \Link\User::find(where:['username'=> $_POST['username']]);
+if( isset ( $_POST['action'] ) ) {
 
-	if( $user and $user-> checkPassword($_POST['password']) ) {
+	$user = \Link\User::find( where: [ 'username' => mb_strtolower( $_POST['username'] ) ] );
+
+	if( $user and $user->checkPassword( $_POST['password'] ) ) {
 		// successful logon
-    $user-> last_login = new \DateTime();
-    $user-> freeze();
-		$_SESSION['user_id'] = $user-> id;
-		$_SESSION['username'] = $user-> username;
+		$user->last_login = new \DateTime();
+		$user->freeze();
+		$_SESSION['user_id']        = $user->id;
+		$_SESSION['username']       = $user->username;
 		$_SESSION['failed attempt'] = 0;
-   	header( "Location: /" );
-		
-  } else {
-    header('Location: ./' );
-    error_log('['.date('Y-m-d H:i:s').'] '.__FILE__.':'.__LINE__.':Logon error for user '.$_POST['username']);
-    exit();
-  }
+		header( "Location: /" );
+
+	} else {
+		header( 'Location: ./' );
+		error_log( '[' . date( 'Y-m-d H:i:s' ) . '] ' . __FILE__ . ':' . __LINE__ . ':Logon error for user ' . $_POST['username'] );
+		exit();
+	}
 
 } else {
 	header( "Location: /logon" );
